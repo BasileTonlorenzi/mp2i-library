@@ -34,15 +34,9 @@ else let rec enlever = function
 in t.donnees.(t.hache k) <- enlever (t.donnees.(t.hache k));;
 
 (* Une fonction qui renvoie une table de hachage contenant tout les éléments de la première qui remplisse une certaine condition *)
-Tableau [List (couple)]
-
 let filter t f =
+let data_inter = Array.make (Array.length (t.donnees)) [] in
 for i=0 to Array.length t.donnees do
-  let rec epreuve l = function
-      | [] -> []
-      | (_, e2)::q when f e2 -> e2::(epreuve q)
-      | e::q -> epreuve q
-
-in {hache = t.hache
-donnees = t.
-}
+  data_inter.(i) <- List.filter f t.donnees.(i)
+done;
+{hache = t.hache; donnees = data_inter; largeur = t.largeur};;
