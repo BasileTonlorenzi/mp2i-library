@@ -4,10 +4,16 @@ type 'a array_dyn = {mutable t : 'a array; mutable n : int};;
 (* Mon objectif ça va être de refaire les fonctions de base utilisable en Python*)
 
 (* remplie t2 avec autant d'élement de t1 que possible. *)
-let copy t1 t2 = 
-for i = 0 to (Array.length t2 - 1) do 
+let copy t1 t2 =
+if Array.length t1 < Array.length t2 then 
+    (for i = 0 to (Array.length t1 - 1) do
+        t2.(i) <- t1.(i)
+    done;)
+else
+(for i = 0 to (Array.length t2 - 1) do 
   t2.(i) <- t1.(i)
-done;;
+done;)
+;;
 
 (* Permet d'ajouter un élément la fin d'un tableau dynamique*)
 let append e d =
