@@ -78,7 +78,7 @@ d1;;
 
 (* Inverser les ordres des éléments d'un tableau *)
 let reverse d =
-    for i = 0 to (d.n)/2 - 1 do
+    for i = 0 to (d.n)/2 do
       let a = d.t.(i) in (* On pose une variable intermédiare pour échanger 2 à 2 les éléments du tableau *)
       d.t.(i) <- d.t.(d.n - i);
       d.t.(d.n - i) <- a;
