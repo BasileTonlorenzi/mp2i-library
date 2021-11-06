@@ -58,7 +58,7 @@ d1;;
 let filter d f =
 let d1 = {t = [| |]; n = 0} in
 for i = 0 to (d.n - 1) do 
-  if f (d.t.(i)) then append i d1
+  if f (d.t.(i)) then append d.t.(i) d1
   else ()
 done;
 d1;;
