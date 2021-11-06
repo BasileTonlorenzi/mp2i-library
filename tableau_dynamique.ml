@@ -49,7 +49,7 @@ d3;;
 let suppr d m =
 let d1 = {t = [| |]; n = 0} in
 for i = 0 to (Array.length d.t - 1) do 
-  if m <> i then append i d1
+  if m <> i then append d.t.(i) d1
   else ()
 done;
 d1;;
