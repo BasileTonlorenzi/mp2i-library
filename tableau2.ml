@@ -5,8 +5,8 @@ type 'a array_dyn = {mutable t : 'a array; mutable n : int};;
 let reverse d =
     for i = 0 to (d.n)/2 do
       let a = d.t.(i) in (* On pose une variable intermédiare pour échanger 2 à 2 les éléments du tableau *)
-      d.t.(i) <- d.t.(d.n - i);
-      d.t.(d.n - i) <- a;
+      d.t.(i) <- d.t.(d.n - 1 - i);
+      d.t.(d.n - i - 1) <- a;
     done;
 d;;
 
@@ -24,12 +24,12 @@ let dichotomie d e =
  (* Fonction coupant un tableau dynamique en 2 à la position m*)
 let split d m =
 (*On définie d'abord les tableaux dynamiques à modifier*)
-let d1 = {t = Array.make m d.t.(0); n = m-1} in
+let d1 = {t = Array.make m d.t.(0); n = m} in
 let difference = Array.length d.t - Array.length d1.t in
-let d2 = {t = Array.make difference d.t.(0); n = d.n - (m-1)} in
+let d2 = {t = Array.make difference d.t.(0); n = d.n - m} in
 
-for i = 0 to Array.length d.t do
+for i = 0 to (d.n - 1) do
     if i <= (m-1) then d1.t.(i) <- d.t.(i)
-    else d2.t.(i) <- d.t.(i)
+    else d2.t.(i - m) <- d.t.(i)
 done;
 (d1, d2);; (*d1 a tout les élément jusque m, m compris, d2 a tout les autres éléments*)
