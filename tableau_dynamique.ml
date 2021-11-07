@@ -48,7 +48,7 @@ d3;;
 (* Fonction permettant de supprimer un élément à une position précise d'un tableau *)
 let suppr d m =
 let d1 = {t = [| |]; n = 0} in
-for i = 0 to (Array.length d.t - 1) do 
+for i = 0 to (d.n - 1) do 
   if m <> i then append d.t.(i) d1
   else ()
 done;
