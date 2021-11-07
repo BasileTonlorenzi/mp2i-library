@@ -21,7 +21,7 @@ in aux t.donnees.(t.hache k);;
 
 (* Pour ajouter aux données l'élément e avec une clé si besoin*)
 let ajout t k e = 
-if recherche t k = true then failwith "Pas de k"
+if recherche t k = true then failwith "Deja un k"
 else t.donnees.(t.hache k) <- (k, e)::(t.donnees.(t.hache k));;
 
 (* Pour supprimee l'entrée de k *)
@@ -35,8 +35,11 @@ in t.donnees.(t.hache k) <- enlever (t.donnees.(t.hache k));;
 
 (* Une fonction qui renvoie une table de hachage contenant tout les éléments de la première qui remplisse une certaine condition *)
 let filter t f =
-let data_inter = Array.make (Array.length (t.donnees)) [] in
-for i=0 to Array.length t.donnees do
-  data_inter.(i) <- List.filter f t.donnees.(i)
+let rec verif = function
+    | [] -> []
+    | (k, e)::q when not (f e) -> verif q
+    | e::q -> e::verif q
+in for i = 0 to Array.length t.donnees - 1 do
+    t.donnees.(i) <- verif t.donnees.(i)
 done;
-{hache = t.hache; donnees = data_inter; largeur = t.largeur};;
+t;;
